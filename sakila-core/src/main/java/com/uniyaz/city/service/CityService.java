@@ -27,4 +27,9 @@ public class CityService {
         CityDao cityDao = new CityDao();
         return cityDao.findAllByQueryFilterDto(cityQueryFilterDto);
     }
+
+    public List<City> findAllByQueryFilterDtoCriteria(CityQueryFilterDto cityQueryFilterDto) {
+        CityDao cityDao = new CityDao();
+        return cityDao.findAllByQueryFilterDtoCriteria(cityQueryFilterDto);
+    }
 }

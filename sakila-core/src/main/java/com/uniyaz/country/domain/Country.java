@@ -1,13 +1,14 @@
 package com.uniyaz.country.domain;
 
 import com.uniyaz.common.domain.BaseEntity;
-import org.hibernate.annotations.Index;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "country")
 @Entity
+@Audited
 public class Country extends BaseEntity {
 
     @Id

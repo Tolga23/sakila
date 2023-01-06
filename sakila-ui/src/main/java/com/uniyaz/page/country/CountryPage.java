@@ -60,7 +60,7 @@ public class CountryPage extends VerticalLayout{
         filterFormLayout.addComponent(idFiltre);
 
         countryFilter = new TextField();
-        countryFilter.setCaption("Country");
+        countryFilter.setCaption("City");
         filterFormLayout.addComponent(countryFilter);
 
         buildSearchButton();
@@ -126,7 +126,7 @@ public class CountryPage extends VerticalLayout{
         formLayout.addComponent(id);
 
         countryField = new TextField();
-        countryField.setCaption("Country");
+        countryField.setCaption("City");
         formLayout.addComponent(countryField);
     }
 

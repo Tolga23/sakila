@@ -1,28 +1,23 @@
-package com.uniyaz.actor.domain;
+package com.uniyaz.film.domain;
 
 import com.uniyaz.common.domain.BaseEntity;
-import org.hibernate.annotations.Index;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "actor")
+@Table(name = "film")
 @Entity
 @Audited
-public class Actor extends BaseEntity {
+public class Film extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "actor_id")
+    @Column(name = "film_id")
     private Long id;
 
-    @Index(name = "IDX_ACTOR_FIRST_NAME")
-    @Column(name = "first_name", length = 45)
-    private String firstName;
-
-    @Column(name = "last_name", length = 45)
-    private String lastName;
+    @Column(name = "title", length = 255)
+    private String title;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
@@ -37,20 +32,12 @@ public class Actor extends BaseEntity {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getLastUpdate() {
@@ -63,6 +50,6 @@ public class Actor extends BaseEntity {
 
     @Override
     public String toString() {
-        return firstName;
+        return title;
     }
 }
