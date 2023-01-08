@@ -168,19 +168,8 @@ public class Film extends BaseEntity {
     @Override
     public String toString() {
         return "Film{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", releaseYear=" + releaseYear +
+                "title='" + title + '\'' +
                 ", language=" + language +
-                ", originalLanguageId=" + originalLanguageId +
-                ", rentalDuration=" + rentalDuration +
-                ", rentalRate=" + rentalRate +
-                ", length=" + length +
-                ", replacementCost=" + replacementCost +
-                ", rating='" + rating + '\'' +
-                ", specialFeatures='" + specialFeatures + '\'' +
-                ", lastUpdate=" + lastUpdate +
                 '}';
     }
 }

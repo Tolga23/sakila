@@ -3,6 +3,7 @@ package com.uniyaz;
 import com.uniyaz.page.actor.ActorPage;
 import com.uniyaz.page.city.CityPage;
 import com.uniyaz.page.country.CountryPage;
+import com.uniyaz.page.search.SearchPage;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -29,6 +30,8 @@ public class MyUI extends UI {
     private Button actorButton;
     private Button countryButton;
     private Button cityButton;
+
+    private Button searchButton;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -59,6 +62,25 @@ public class MyUI extends UI {
 
         buildCityButton();
         buttonLayout.addComponent(cityButton);
+
+        buildSearchButton();
+        buttonLayout.addComponent(searchButton);
+
+    }
+
+    private void buildSearchButton() {
+
+        searchButton = new Button();
+        searchButton.setWidth(100, Unit.PIXELS);
+        searchButton.setCaption("Search");
+        searchButton.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                SearchPage searchPage = new SearchPage();
+                contentLayout.removeAllComponents();
+                contentLayout.addComponent(searchPage);
+            }
+        });
     }
 
     private void buildActorButton() {

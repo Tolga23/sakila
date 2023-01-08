@@ -8,22 +8,21 @@ import org.hibernate.envers.Audited;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "film_category")
 @Audited
 public class FilmCategory implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "film_id")
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "film_id")
     @ForeignKey(name = "fk_film_category_film")
     private Film film;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "category_id")
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @ForeignKey(name = "fk_film_category_category")
     private Category category;
@@ -38,6 +37,22 @@ public class FilmCategory implements Serializable {
         this.lastUpdate = lastUpdate;
     }
 
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "FilmCategory{" +
@@ -45,5 +60,18 @@ public class FilmCategory implements Serializable {
                 ", category=" + category +
                 ", lastUpdate=" + lastUpdate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FilmCategory that = (FilmCategory) o;
+        return Objects.equals(film, that.film) && Objects.equals(category, that.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(film, category);
     }
 }

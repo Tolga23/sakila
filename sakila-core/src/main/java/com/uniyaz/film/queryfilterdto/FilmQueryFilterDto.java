@@ -1,5 +1,6 @@
 package com.uniyaz.film.queryfilterdto;
 
+import com.uniyaz.actor.domain.Actor;
 import com.uniyaz.language.domain.Language;
 
 public class FilmQueryFilterDto {
@@ -7,6 +8,8 @@ public class FilmQueryFilterDto {
     private Long id;
     private String title;
     private Language languageId;
+
+    private Actor actorName;
 
     public Long getId() {
         return id;
@@ -30,5 +33,13 @@ public class FilmQueryFilterDto {
 
     public void setLanguageId(Language languageId) {
         this.languageId = languageId;
+    }
+
+    public Actor getActorName() {
+        return actorName;
+    }
+
+    public void setActorName(Actor actorName) {
+        this.actorName = actorName;
     }
 }

@@ -38,28 +38,38 @@ public class FilmCategoryDao {
 
     public List<FilmCategory> findAllByQueryFilterDto(FilmCategoryQueryFilterDto filmCategoryQueryFilterDto) {
         String hql =
-                "Select filmCategory " +
-                "From FilmCategory filmCategory " +
-                "Left Join fetch filmCategory.category category " +
-                "Left Join fetch filmCategory.film film " +
-                "where 1=1 ";
+                 "SELECT fc FROM FilmCategory fc"
+                + " Left JOIN fetch fc.category c"
+                + " Left JOIN fetch  fc.film f"
+                + " Left JOIN fetch  f.language l"
+                + " WHERE 1=1";
 
         if (filmCategoryQueryFilterDto.getCategory() != null) {
-            hql += " and filmCategory.category = :category ";
+            hql += " and fc.category = :category ";
         }
         if (filmCategoryQueryFilterDto.getFilm() != null) {
-            hql += " and filmCategory.film = :film ";
+            hql += " and fc.film = :film ";
         }
+        if (filmCategoryQueryFilterDto.getLanguage() != null) {
+            hql += " and f.language = :language ";
+        }
+
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Query query = session.createQuery(hql);
 
         if (filmCategoryQueryFilterDto.getCategory() != null) {
-            query.setParameter("category", filmCategoryQueryFilterDto.getCategory().getName());
+            query.setParameter("category", filmCategoryQueryFilterDto.getCategory());
         }
         if (filmCategoryQueryFilterDto.getFilm() != null) {
-            query.setParameter("film", filmCategoryQueryFilterDto.getFilm().getTitle());
+            query.setParameter("film", filmCategoryQueryFilterDto.getFilm());
         }
+
+        if (filmCategoryQueryFilterDto.getLanguage() != null) {
+            query.setParameter("language", filmCategoryQueryFilterDto.getLanguage());
+        }
+
+
         List<FilmCategory> filmCategoryList = query.list();
         return filmCategoryList;
     }
@@ -71,15 +81,15 @@ public class FilmCategoryDao {
         criteria.createAlias("category", "category", JoinType.LEFT_OUTER_JOIN);
         criteria.createAlias("film", "film", JoinType.LEFT_OUTER_JOIN);
 
-
         if (filmCategoryQueryFilterDto.getCategory() != null) {
-            criteria.add(Restrictions.eq("category", filmCategoryQueryFilterDto.getCategory().getName()));
+            criteria.add(Restrictions.eq("category", filmCategoryQueryFilterDto.getCategory()));
         }
         if (filmCategoryQueryFilterDto.getFilm() != null) {
-            criteria.add(Restrictions.eq("film", filmCategoryQueryFilterDto.getFilm().getTitle()));
+            criteria.add(Restrictions.eq("film", filmCategoryQueryFilterDto.getFilm()));
         }
         List<FilmCategory> filmCategoryList = criteria.list();
         return filmCategoryList;
     }
+
 
 }

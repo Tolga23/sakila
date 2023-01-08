@@ -33,5 +33,10 @@ public class FilmService {
         return filmDao.findAllByQueryFilterDtoCriteria(filmQueryFilterDto);
     }
 
+    public List<Film> findFilmActorLanguage(FilmQueryFilterDto filmQueryFilterDto) {
+        FilmDao filmDao = new FilmDao();
+        return filmDao.findFilmActorLanguage(filmQueryFilterDto);
+    }
+
 
 }

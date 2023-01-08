@@ -47,10 +47,6 @@ public class Language extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Language{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastUpdate=" + lastUpdate +
-                '}';
+        return name;
     }
 }
