@@ -2,6 +2,7 @@ package com.uniyaz.film.service;
 
 import com.uniyaz.film.dao.FilmDao;
 import com.uniyaz.film.domain.Film;
+import com.uniyaz.film.queryfilterdto.FilmQueryFilterDto;
 
 import java.util.List;
 
@@ -21,4 +22,16 @@ public class FilmService {
         FilmDao filmDao = new FilmDao();
         filmDao.delete(film);
     }
+
+    public List<Film> findAllByQueryFilterDto(FilmQueryFilterDto filmQueryFilterDto) {
+        FilmDao filmDao = new FilmDao();
+        return filmDao.findAllByQueryFilterDto(filmQueryFilterDto);
+    }
+
+    public List<Film> findAllByQueryFilterDtoCriteria(FilmQueryFilterDto filmQueryFilterDto) {
+        FilmDao filmDao = new FilmDao();
+        return filmDao.findAllByQueryFilterDtoCriteria(filmQueryFilterDto);
+    }
+
+
 }

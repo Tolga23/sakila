@@ -13,7 +13,7 @@ public class CountryDao {
     public List<Country> findAll() {
         SessionFactory sessionFcountryy = HibernateUtil.getSessionFactory();
         Session currentSession = sessionFcountryy.openSession();
-        Query query = currentSession.createQuery("Select country From Country country");
+        Query query = currentSession.createQuery("Select country From Country country ");
         List<Country> countryList = query.list();
         return countryList;
     }

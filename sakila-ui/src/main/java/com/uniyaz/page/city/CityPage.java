@@ -62,7 +62,7 @@ public class CityPage extends VerticalLayout{
         verticalLayoutSag.addComponent(buttonLayout);
 
         CityService cityService = new CityService();
-        List<City> cityList = cityService.findAllByQueryFilterDto(new CityQueryFilterDto());
+        List<City> cityList = cityService.findAll();
         fillTable(cityList);
     }
 
@@ -100,7 +100,7 @@ public class CityPage extends VerticalLayout{
                 if (countryFilter.getValue() != null) cityQueryFilterDto.setCountry((Country) countryFilter.getValue());
 
                 CityService cityService = new CityService();
-                List<City> cityList = cityService.findAllByQueryFilterDtoCriteria(cityQueryFilterDto);
+                List<City> cityList = cityService.findAllByQueryFilterDto(cityQueryFilterDto);
                 fillTable(cityList);
             }
         });

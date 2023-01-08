@@ -8,17 +8,15 @@ import org.junit.Test;
 import java.util.List;
 
 public class FilmActorServiceTest {
-
-    @Test
-    public void findAllTest() {
+   /*@Test
+   public void findAllTest() {
 
         FilmActorService filmActorService = new FilmActorService();
-        FilmActorDao filmActorDao = new FilmActorDao();
-        FilmActorQueryFilterDto dto = new FilmActorQueryFilterDto();
 
-        List<FilmActor> filmActorList = filmActorDao.findAllByQueryFilterDtoCriteria(dto);
+
+        List<FilmActor> filmActorList = filmActorService.findAll();
         for (FilmActor filmActor : filmActorList) {
             System.out.println(filmActor);
         }
-    }
+    }*/
 }

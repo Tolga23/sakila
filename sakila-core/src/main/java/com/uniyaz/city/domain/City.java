@@ -30,9 +30,6 @@ public class City extends BaseEntity {
     @ForeignKey(name = "fk_city_country")
     private Country country;
 
-    @Transient
-    private String testStr;
-
     @Override
     public Long getId() {
         return id;
@@ -71,11 +68,4 @@ public class City extends BaseEntity {
         return city;
     }
 
-    public String getTestStr() {
-        return city;
-    }
-
-    public void setTestStr(String testStr) {
-        this.testStr = testStr;
-    }
 }
