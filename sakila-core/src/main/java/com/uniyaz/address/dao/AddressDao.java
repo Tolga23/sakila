@@ -3,39 +3,18 @@ package com.uniyaz.address.dao;
 import com.uniyaz.HibernateUtil;
 import com.uniyaz.address.domain.Address;
 import com.uniyaz.address.queryfilterdto.AddressQueryFilterDto;
+import com.uniyaz.common.domain.dao.BaseDao;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
-public class AddressDao {
+public class AddressDao extends BaseDao<Address> {
 
-    public List<Address> findAll(){
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFactory.openSession();
-        Query query = currentSession.createQuery("Select address From Address address");
-        List<Address> addressList = query.list();
-
-        return addressList;
+    public AddressDao() {
+        super(Address.class);
     }
 
-    public Address save(Address address){
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFactory.openSession();
-        Transaction transaction = currentSession.beginTransaction();
-        address = (Address) currentSession.merge(address);
-        transaction.commit();
-        return address;
-    }
-
-    public void delete(Address address){
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFactory.openSession();
-        Transaction transaction = currentSession.beginTransaction();
-        currentSession.delete(address);
-        transaction.commit();
-
-    }
 
     public List<Address> findAllByQueryFilterDto(AddressQueryFilterDto addressQueryFilterDto) {
 

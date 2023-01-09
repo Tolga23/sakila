@@ -33,4 +33,9 @@ public class FilmCategoryService {
         return filmCategoryDao.findAllByQueryFilterDtoCriteria(filmCategoryQueryFilterDto);
     }
 
+    public List<FilmCategory> findAllByQueryFilterDtoDetachedCriteria(FilmCategoryQueryFilterDto filmCategoryQueryFilterDto){
+        FilmCategoryDao filmCategoryDao = new FilmCategoryDao();
+        return filmCategoryDao.findAllByQueryFilterDtoDetachedCriteria(filmCategoryQueryFilterDto);
+    }
+
 }

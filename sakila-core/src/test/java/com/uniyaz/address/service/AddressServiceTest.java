@@ -25,7 +25,7 @@ public class AddressServiceTest {
         Address address = new Address();
         City city = new City();
 
-        address.setId(1l);
+        address.setId(605l);
         city.setId(5L);
         address.setCity(city);
         address.setAdress("Test");
@@ -43,7 +43,7 @@ public class AddressServiceTest {
     @Test
     public void deleteTest() {
         Address address = new Address();
-        address.setId(1l);
+        address.setId(605l);
 
         AddressService addressService = new AddressService();
         addressService.delete(address);

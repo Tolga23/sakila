@@ -3,36 +3,16 @@ package com.uniyaz.category.dao;
 import com.uniyaz.HibernateUtil;
 import com.uniyaz.category.domain.Category;
 import com.uniyaz.category.queryfilterdto.CategoryQueryFilterDto;
+import com.uniyaz.common.domain.dao.BaseDao;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
-public class CategoryDao {
+public class CategoryDao extends BaseDao<Category> {
 
-    public List<Category> findAll() {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFactory.openSession();
-        Query query = currentSession.createQuery("Select category From Category category");
-        List<Category> categoryList = query.list();
-        return categoryList;
-    }
-
-    public Category save(Category category) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFactory.openSession();
-        Transaction transaction = currentSession.beginTransaction();
-        category = (Category) currentSession.merge(category);
-        transaction.commit();
-        return category;
-    }
-
-    public void delete(Category category) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFactory.openSession();
-        Transaction transaction = currentSession.beginTransaction();
-        currentSession.delete(category);
-        transaction.commit();
+    public CategoryDao() {
+        super(Category.class);
     }
 
     public List<Category> findAllByQueryFilterDto(CategoryQueryFilterDto categoryQueryFilterDto) {

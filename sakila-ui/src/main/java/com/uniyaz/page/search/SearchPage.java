@@ -113,7 +113,7 @@ public class SearchPage extends VerticalLayout {
                 if (!actorNameFilter.getValue().equals("")) filmCategoryQueryFilterDto.setActorName(actorNameFilter.getValue());
 
                 FilmCategoryService filmCategoryService = new FilmCategoryService();
-                List<FilmCategory> filmList = filmCategoryService.findAllByQueryFilterDto(filmCategoryQueryFilterDto);
+                List<FilmCategory> filmList = filmCategoryService.findAllByQueryFilterDtoDetachedCriteria(filmCategoryQueryFilterDto);
                 fillTable(filmList);
             }
         });
