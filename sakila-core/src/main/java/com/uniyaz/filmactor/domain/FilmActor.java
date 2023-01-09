@@ -7,23 +7,21 @@ import org.hibernate.annotations.ForeignKey;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "film_actor")
 @Entity
 @Audited
-public class FilmActor extends BaseEntity {
+public class FilmActor implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "film_actor_id")
-    private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "film_id")
     @ForeignKey(name = "fk_film_actor_film")
     private Film film;
 
+    @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "actor_id")
     @ForeignKey(name = "fk_film_actor_actor")
@@ -33,14 +31,6 @@ public class FilmActor extends BaseEntity {
     @Column(name = "last_update")
     private Date lastUpdate;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Film getFilm() {
         return film;
@@ -69,7 +59,6 @@ public class FilmActor extends BaseEntity {
     @Override
     public String toString() {
         return "FilmActor{" +
-                "id=" + id +
                 ", film=" + film +
                 ", actor=" + actor +
                 ", lastUpdate=" + lastUpdate +

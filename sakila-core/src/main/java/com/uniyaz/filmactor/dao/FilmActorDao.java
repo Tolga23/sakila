@@ -44,9 +44,6 @@ public class FilmActorDao {
                 "Left Join fetch filmActor.film film " +
                 "where 1=1 ";
 
-        if (filmActorQueryFilterDto.getId() != null) {
-            hql += " and filmActor.id = :filmActorId";
-        }
 
         if (filmActorQueryFilterDto.getActor() != null) {
             hql += " and filmActor.actor = :actor ";
@@ -60,9 +57,6 @@ public class FilmActorDao {
         Session currentSession = sessionFactory.openSession();
         Query query = currentSession.createQuery(hql);
 
-        if (filmActorQueryFilterDto.getId() != null) {
-            query.setParameter("filmActorId", filmActorQueryFilterDto.getId());
-        }
 
         if (filmActorQueryFilterDto.getActor() != null) {
             query.setParameter("actor", filmActorQueryFilterDto.getActor().getFirstName());
@@ -82,9 +76,6 @@ public class FilmActorDao {
         Session currentSession = sessionFactory.openSession();
         Criteria criteria = currentSession.createCriteria(FilmActor.class);
 
-        if (filmActorQueryFilterDto.getId() != null) {
-            criteria.add(Restrictions.eq("id", filmActorQueryFilterDto.getId()));
-        }
 
         List<FilmActor> filmActors = criteria.list();
         return filmActors;

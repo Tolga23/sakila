@@ -47,11 +47,14 @@ public class FilmCategoryDao {
         if (filmCategoryQueryFilterDto.getCategory() != null) {
             hql += " and fc.category = :category ";
         }
-        if (filmCategoryQueryFilterDto.getFilm() != null) {
-            hql += " and fc.film = :film ";
+        if (filmCategoryQueryFilterDto.getFilmName() != null) {
+            hql += " and fc.film.title = :film ";
         }
         if (filmCategoryQueryFilterDto.getLanguage() != null) {
             hql += " and f.language = :language ";
+        }
+        if (filmCategoryQueryFilterDto.getActorName() != null) {
+            hql += " and fc.film.id in (select fa.film.id from FilmActor fa left join fa.actor actor where actor.firstName = :actorName )";
         }
 
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -61,12 +64,16 @@ public class FilmCategoryDao {
         if (filmCategoryQueryFilterDto.getCategory() != null) {
             query.setParameter("category", filmCategoryQueryFilterDto.getCategory());
         }
-        if (filmCategoryQueryFilterDto.getFilm() != null) {
-            query.setParameter("film", filmCategoryQueryFilterDto.getFilm());
+        if (filmCategoryQueryFilterDto.getFilmName() != null) {
+            query.setParameter("film", filmCategoryQueryFilterDto.getFilm().getTitle());
         }
 
         if (filmCategoryQueryFilterDto.getLanguage() != null) {
             query.setParameter("language", filmCategoryQueryFilterDto.getLanguage());
+        }
+
+        if (filmCategoryQueryFilterDto.getActorName() != null) {
+            query.setParameter("actorName", filmCategoryQueryFilterDto.getActorName());
         }
 
 

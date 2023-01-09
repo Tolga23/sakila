@@ -1,5 +1,6 @@
 package com.uniyaz.filmcategory.service;
 
+import com.uniyaz.actor.domain.Actor;
 import com.uniyaz.filmcategory.domain.FilmCategory;
 import com.uniyaz.filmcategory.queryfilterdto.FilmCategoryQueryFilterDto;
 import org.junit.Test;
@@ -22,6 +23,8 @@ public class FilmCategoryTest {
     public void findAllByQueryfilterDto() {
         FilmCategoryService filmCategoryService = new FilmCategoryService();
         FilmCategoryQueryFilterDto filmCategoryQueryFilterDto = new FilmCategoryQueryFilterDto();
+
+
         List<FilmCategory> filmCategoryList = filmCategoryService.findAllByQueryFilterDto(filmCategoryQueryFilterDto);
 
         for (FilmCategory filmCategory : filmCategoryList) {

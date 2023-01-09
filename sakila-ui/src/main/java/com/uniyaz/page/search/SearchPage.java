@@ -24,9 +24,9 @@ public class SearchPage extends VerticalLayout {
     private TextField filmFilter;
     private CategoryComboBox categoryFilter;
     private LanguageComboBox languageFilter;
+    private TextField actorNameFilter;
 
     private TextField filmNameField;
-
     private CategoryComboBox categoryNameField;
     private LanguageComboBox languageField;
 
@@ -84,6 +84,11 @@ public class SearchPage extends VerticalLayout {
         languageFilter.setCaption("Language");
         filterFormLayout.addComponent(languageFilter);
 
+
+        actorNameFilter = new TextField();
+        actorNameFilter.setCaption("Aktör");
+        filterFormLayout.addComponent(actorNameFilter);
+
         buildSearchButton();
         filterFormLayout.addComponent(searchButton);
     }
@@ -100,13 +105,12 @@ public class SearchPage extends VerticalLayout {
             @Override
             public void buttonClick(Button.ClickEvent clickEvent) {
 
-                Film film = new Film();
-                film.setTitle(filmFilter.getValue());
 
                 FilmCategoryQueryFilterDto filmCategoryQueryFilterDto = new FilmCategoryQueryFilterDto();
-                if (!filmFilter.getValue().equals("")) filmCategoryQueryFilterDto.setFilm(film);
-                if (!categoryFilter.getValue().equals("")) filmCategoryQueryFilterDto.setCategory((Category) categoryFilter.getValue());
+                if (!filmFilter.getValue().equals("")) filmCategoryQueryFilterDto.setFilmName(filmFilter.getValue());
+                if (categoryFilter.getValue() != null) filmCategoryQueryFilterDto.setCategory((Category) categoryFilter.getValue());
                 if (languageFilter.getValue() != null) filmCategoryQueryFilterDto.setLanguage((Language) languageFilter.getValue());
+                if (!actorNameFilter.getValue().equals("")) filmCategoryQueryFilterDto.setActorName(actorNameFilter.getValue());
 
                 FilmCategoryService filmCategoryService = new FilmCategoryService();
                 List<FilmCategory> filmList = filmCategoryService.findAllByQueryFilterDto(filmCategoryQueryFilterDto);
@@ -144,7 +148,7 @@ public class SearchPage extends VerticalLayout {
     private void fillFormLayoutByFilm(FilmCategory film) {
 
         filmNameField.setValue(film.getFilm().getTitle());
-        categoryNameField.setValue(film.getCategory().getName());
+        categoryNameField.setValue(film.getCategory());
         languageField.setValue(film.getFilm().getLanguageId());
     }
 
@@ -186,7 +190,6 @@ public class SearchPage extends VerticalLayout {
 
                 FilmCategory filmCategory = new FilmCategory();
 
-                filmCategory.setFilm(new Film());
                 filmCategory.setCategory((Category) categoryNameField.getValue());
 
                 filmCategory.setLastUpdate(new Date());

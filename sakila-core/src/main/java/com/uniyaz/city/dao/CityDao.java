@@ -23,6 +23,14 @@ public class CityDao {
         return cityList;
     }
 
+    public List<City> findAllEager() {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session currentSession = sessionFactory.openSession();
+        Query query = currentSession.createQuery("Select city From City city Left Join fetch city.country country");
+        List<City> cityList = query.list();
+        return cityList;
+    }
+
     public City save(City city) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session currentSession = sessionFactory.openSession();

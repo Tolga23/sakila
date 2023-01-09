@@ -13,6 +13,11 @@ public class CityService {
         return cityDao.findAll();
     }
 
+    public List<City> findAllEager() {
+        CityDao cityDao = new CityDao();
+        return cityDao.findAllEager();
+    }
+
     public City save(City city) {
         CityDao cityDao = new CityDao();
         return cityDao.save(city);

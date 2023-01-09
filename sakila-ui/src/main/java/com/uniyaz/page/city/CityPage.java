@@ -62,7 +62,7 @@ public class CityPage extends VerticalLayout{
         verticalLayoutSag.addComponent(buttonLayout);
 
         CityService cityService = new CityService();
-        List<City> cityList = cityService.findAll();
+        List<City> cityList = cityService.findAllEager();
         fillTable(cityList);
     }
 
