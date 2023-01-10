@@ -2,6 +2,7 @@ package com.uniyaz.actor.service;
 
 import com.uniyaz.actor.dao.ActorDao;
 import com.uniyaz.actor.domain.Actor;
+import com.uniyaz.actor.queryfilterdto.ActorQueryFilterDto;
 import org.junit.Test;
 
 import java.util.Date;
@@ -41,6 +42,23 @@ public class ActorServiceTest {
         actorDao.delete(actor);
 
         System.out.println("Silindi");
+    }
+
+    @Test
+    public void baseQueryGenericTest(){
+
+        ActorQueryFilterDto actor = new ActorQueryFilterDto();
+          actor.setId(1l);
+          actor.setFirstName("PENELOPE");
+
+        ActorDao actorDao = new ActorDao();
+        List<Actor> actorList = actorDao.findAllByQueryFilterDto(actor);
+
+        for (Actor actor1 : actorList) {
+            System.out.println(actor1);
+        }
+
+
     }
 
 }

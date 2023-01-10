@@ -25,37 +25,6 @@ public class ActorDao extends BaseDao<Actor>{
         return actorList;
     }
 
-    public List<Actor> findAllByQueryFilterDto(ActorQueryFilterDto actorQueryFilterDto) {
-
-        String hql =
-                "Select actor " +
-                "From Actor actor " +
-                "where 1=1 ";
-
-        if (actorQueryFilterDto.getId() != null) {
-            hql += " and actor.id = :actorId";
-        }
-
-        if (actorQueryFilterDto.getFirstName() != null) {
-            hql += " and actor.firstName = :firstName";
-        }
-
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFactory.openSession();
-        Query query = currentSession.createQuery(hql);
-
-        if (actorQueryFilterDto.getId() != null) {
-            query.setParameter("actorId", actorQueryFilterDto.getId());
-        }
-
-        if (actorQueryFilterDto.getFirstName() != null) {
-            query.setParameter("firstName", actorQueryFilterDto.getFirstName());
-        }
-
-        List<Actor> actorList = query.list();
-        return actorList;
-    }
-
 
     public List<Actor> findAllByQueryFilterDtoCriteria(ActorQueryFilterDto actorQueryFilterDto) {
 

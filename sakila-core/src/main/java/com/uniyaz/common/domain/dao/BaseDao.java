@@ -2,10 +2,12 @@ package com.uniyaz.common.domain.dao;
 
 import com.uniyaz.HibernateUtil;
 import com.uniyaz.common.domain.BaseEntity;
+import com.uniyaz.common.domain.dto.BaseQueryFilterDto;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class BaseDao <T extends BaseEntity> {
         List<T> entityList = criteria.list();
         return entityList;
     }
-    
+
     public T save(T entity) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session currentSession = sessionFactory.openSession();
@@ -41,4 +43,17 @@ public class BaseDao <T extends BaseEntity> {
         currentSession.delete(entity);
         transaction.commit();
     }
+
+    public List<T> findAllByQueryFilterDto(BaseQueryFilterDto<T> baseQueryFilterDto) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session currentSession = sessionFactory.openSession();
+        Criteria criteria = currentSession.createCriteria(entityClass);
+
+        if (baseQueryFilterDto != null){
+            criteria = baseQueryFilterDto.addFilter(criteria);
+        }
+
+        return criteria.list();
+    }
+
 }

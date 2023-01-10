@@ -55,7 +55,7 @@ public class AddressServiceTest {
         addressQueryFilterDto.setId(2l);
         
         AddressService addressService = new AddressService();
-        addressService.findAllByQueryFilterDtoCriteria(addressQueryFilterDto);
+        addressService.findAllByQueryFilterDto(addressQueryFilterDto);
 
         System.out.println(addressQueryFilterDto);
     }
