@@ -7,6 +7,7 @@ public class CityQueryFilterDto {
     private Long id;
     private String city;
     private Country country;
+    private String countryName;
 
     public Long getId() {
         return id;
@@ -30,5 +31,13 @@ public class CityQueryFilterDto {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 }
