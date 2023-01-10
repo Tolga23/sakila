@@ -3,10 +3,7 @@ package com.uniyaz.common.domain.dao;
 import com.uniyaz.HibernateUtil;
 import com.uniyaz.common.domain.BaseEntity;
 import com.uniyaz.common.domain.dto.BaseQueryFilterDto;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -44,16 +41,34 @@ public class BaseDao <T extends BaseEntity> {
         transaction.commit();
     }
 
-    public List<T> findAllByQueryFilterDto(BaseQueryFilterDto<T> baseQueryFilterDto) {
+    public List<T> findAllByQueryFilterDto(BaseQueryFilterDto baseQueryFilterDto) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session currentSession = sessionFactory.openSession();
         Criteria criteria = currentSession.createCriteria(entityClass);
 
         if (baseQueryFilterDto != null){
-            criteria = baseQueryFilterDto.addFilter(criteria);
+            baseQueryFilterDto.addFilter(criteria);
         }
 
         return criteria.list();
+    }
+
+    public List<T> findAllByQueryFilterDtoHql(BaseQueryFilterDto baseQueryFilterDto){
+
+        String hql = "select entity from " + entityClass.getSimpleName() + " entity where 1=1";
+
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session currentSession = sessionFactory.openSession();
+        Query query = currentSession.createQuery(hql);
+
+        if (baseQueryFilterDto != null){
+            query = baseQueryFilterDto.addQuery(query);
+        }
+
+        List list = query.list();
+
+        return list;
+
     }
 
 }

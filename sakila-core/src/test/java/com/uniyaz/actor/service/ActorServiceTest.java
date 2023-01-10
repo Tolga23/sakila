@@ -61,4 +61,21 @@ public class ActorServiceTest {
 
     }
 
+    @Test
+    public void baseQueryWithHql(){
+
+        ActorQueryFilterDto actor = new ActorQueryFilterDto();
+        actor.setId(1l);
+       // actor.setFirstName("PENELOPE");
+
+        ActorDao actorDao = new ActorDao();
+        List<Actor> actorList = actorDao.findAllByQueryFilterDtoHql(actor);
+
+        for (Actor actor1 : actorList) {
+            System.out.println(actor1);
+        }
+
+
+    }
+
 }

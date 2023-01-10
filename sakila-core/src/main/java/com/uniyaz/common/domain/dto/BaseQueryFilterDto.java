@@ -2,8 +2,10 @@ package com.uniyaz.common.domain.dto;
 
 import com.uniyaz.common.domain.BaseEntity;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 
-public abstract class BaseQueryFilterDto<T extends BaseEntity> {
+public abstract class BaseQueryFilterDto {
 
-    public abstract Criteria addFilter(Criteria criteria);
+    public abstract Query addQuery(Query query);
+    public abstract void addFilter(Criteria criteria);
 }
