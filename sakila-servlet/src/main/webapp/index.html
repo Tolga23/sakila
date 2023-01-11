@@ -6,16 +6,13 @@
 <h2>Hello World!</h2>
 
 
-<form action="/CountryJsonServlet" method="post">
-    Country <input type="text" name="country">
-    <br />
-
-    <input type="submit" value="Search">
-
-</form>
+Country <input type="text" id="country" >
+<br/>
+<input type="button" value="Search" onclick="findAllCityListByCountryName()">
 
 
-<input type="button" value="COUNTRY2 LIST" onclick="findAllCityList()">
+<br/>
+<input type="button" value="COUNTRY LIST" onclick="findAllCityList()">
 <table id="cityTable"></table>
 
 

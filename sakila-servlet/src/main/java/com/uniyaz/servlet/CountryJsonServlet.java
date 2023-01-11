@@ -17,7 +17,7 @@ import java.util.List;
 public class CountryJsonServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CityService cityService = new CityService();
 
         CityQueryFilterDto cityQueryFilterDto = new CityQueryFilterDto();
@@ -34,6 +34,7 @@ public class CountryJsonServlet extends HttpServlet {
         resp.getWriter().write(cityListAsGson);
 
     }
+
 
 
 }
