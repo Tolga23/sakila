@@ -1,6 +1,7 @@
 package com.uniyaz.country.dao;
 
 import com.uniyaz.HibernateUtil;
+import com.uniyaz.common.domain.dao.BaseDao;
 import com.uniyaz.country.domain.Country;
 import com.uniyaz.country.queryfilterdto.CountryQueryFilterDto;
 import org.hibernate.*;
@@ -8,31 +9,11 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
-public class CountryDao {
+public class CountryDao extends BaseDao<Country> {
 
-    public List<Country> findAll() {
-        SessionFactory sessionFcountryy = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFcountryy.openSession();
-        Query query = currentSession.createQuery("Select country From Country country ");
-        List<Country> countryList = query.list();
-        return countryList;
-    }
 
-    public Country save(Country country) {
-        SessionFactory sessionFcountryy = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFcountryy.openSession();
-        Transaction transaction = currentSession.beginTransaction();
-        country = (Country) currentSession.merge(country);
-        transaction.commit();
-        return country;
-    }
-
-    public void delete(Country country) {
-        SessionFactory sessionFcountryy = HibernateUtil.getSessionFactory();
-        Session currentSession = sessionFcountryy.openSession();
-        Transaction transaction = currentSession.beginTransaction();
-        currentSession.delete(country);
-        transaction.commit();
+    public CountryDao() {
+        super(Country.class);
     }
 
     public List<Country> findAllByQueryFilterDto(CountryQueryFilterDto countryQueryFilterDto) {
